@@ -31,3 +31,9 @@ python -m unittest -v
 O laboratório usa um único worker e simula o receptor com uma função local. Não há limite de tentativas, backoff nem fila de mensagens mortas: um evento que sempre falha fica pendente para sempre. A reentrega depende de uma nova chamada a `dispatch()`. Se o receptor aplicar o efeito e a confirmação se perder, a outbox pode reenviar o evento. Em produção, o receptor precisa registrar a deduplicação de forma durável e consistente com o efeito aplicado.
 
 O [Webhook Lab](https://github.com/Yann-Xavier/webhook-lab) explora o outro lado desse fluxo: como o receptor lida com a chegada repetida de um evento.
+
+## Dados e privacidade
+
+- Use apenas dados sintéticos. O laboratório grava somente IDs de eventos, sem conteúdo.
+- Os testes criam o banco em uma pasta temporária e a removem ao final. Bancos criados fora dos testes não são apagados automaticamente.
+- Os arquivos `*.sqlite` e `*.sqlite3` estão no `.gitignore`, para que bancos locais não sejam versionados.
